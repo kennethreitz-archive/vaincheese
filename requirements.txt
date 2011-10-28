@@ -1,5 +1,5 @@
 Flask==0.8
-git+git://github.com/thadeusb/flask-cache.git@master
+git+git://github.com/thadeusb/flask-cache.git
 Jinja2==2.6
 git+git://github.com/kennethreitz/werkzeug.git
 distribute==0.6.24
