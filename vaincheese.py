@@ -11,9 +11,9 @@ from vanity import downloads_total
 
 
 app = Flask(__name__)
-# app.config['CACHE_TYPE'] = 'redis'
-# app.config['CACHE_REDIS_HOST'] = 'localhost'
-# app.config['CACHE_REDIS_PORT'] = 6379
+app.config['CACHE_TYPE'] = 'redis'
+app.config['CACHE_REDIS_HOST'] = 'localhost'
+app.config['CACHE_REDIS_PORT'] = 6379
 
 app.debug = True
 
@@ -21,14 +21,14 @@ cache = Cache(app)
 
 
 # Support Heroku's Redis environment.
-# if 'REDISTOGO_URL' in os.environ:
-#     r = cache.cache._client.connection_pool
-#     p = urlparse(os.environ['REDISTOGO_URL'])
+if 'REDISTOGO_URL' in os.environ:
+    r = cache.cache._client.connection_pool
+    p = urlparse(os.environ['REDISTOGO_URL'])
 
-#     r.host = p.host
-#     r.port = p.port
-#     r.password = p.password
-#     r.username = p.username
+    r.host = p.host
+    r.port = p.port
+    r.password = p.password
+    r.username = p.username
 
 
 
