@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import json
 from urlparse import urlparse
 
 from flask import Flask, jsonify
