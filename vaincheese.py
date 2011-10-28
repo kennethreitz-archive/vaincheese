@@ -27,7 +27,8 @@ def index():
     d = {
         'routes': {
             '/pypi/:package': 'Given package\'s download stats.'
-        }
+        },
+        'source': 'https://github.com/kennethreitz/vaincheese'
     }
     return jsonify(d)
 
