@@ -22,9 +22,9 @@ cache = Cache(app)
 
 # Support Heroku's Redis environment.
 if 'REDISTOGO_URL' in os.environ:
-    parsed = urlparse(os.environ['REDISTOGO_URL'])
-
     r = cache.cache._client.connection_pool
+    p = urlparse(os.environ['REDISTOGO_URL'])
+
     r.host = p.host
     r.port = p.port
     r.password = p.password
