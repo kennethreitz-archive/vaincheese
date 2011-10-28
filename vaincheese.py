@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
 import json
+from urlparse import urlparse
 
 from flask import Flask
 from flaskext.cache import Cache
@@ -9,7 +11,25 @@ from vanity import downloads_total
 
 
 app = Flask(__name__)
+app.config['CACHE_TYPE'] = 'redis'
+app.config['CACHE_REDIS_HOST'] = 'localhost'
+app.config['CACHE_REDIS_PORT'] = 6379
+
+app.debug = True
+
 cache = Cache(app)
+
+
+# Support Heroku's Redis environment.
+if 'REDISTOGO_URL' in os.environ:
+    parsed = urlparse(os.environ['REDISTOGO_URL'])
+
+    r = cache.cache._client.connection_pool
+    r.host = p.host
+    r.port = p.port
+    r.password = p.password
+    r.username = p.username
+
 
 
 @app.route('/')
@@ -23,14 +43,12 @@ def index():
 
 
 @app.route('/<package>')
-@cache.cached(timeout=6*60*60)   # Six hours.
+@cache.memoize(timeout=6*60*60)
 def package_stats(package):
-
-    downs = downloads_total(package)
 
     d = {
         'package': package,
-        'downloads': downs
+        'downloads': downloads_total(package)
     }
 
     return json.dumps(d)
