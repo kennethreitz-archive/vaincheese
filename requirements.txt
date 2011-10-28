@@ -1,6 +1,8 @@
 Flask==0.8
+Flask-Cache==0.3.4
 Jinja2==2.6
 Werkzeug==0.8.1
 distribute==0.6.19
-vanity==1.1.0
+gunicorn==0.13.4
+vanity==1.1.1
 wsgiref==0.1.2
