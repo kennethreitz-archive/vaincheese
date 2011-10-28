@@ -25,7 +25,7 @@ cache = Cache(app)
 @app.route('/')
 def index():
     d = {
-        'routes': {
+        'resources': {
             '/pypi/:package': 'Given package\'s download stats.'
         },
         'source': 'https://github.com/kennethreitz/vaincheese'
