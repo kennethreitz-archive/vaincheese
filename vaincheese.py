@@ -25,7 +25,7 @@ if 'REDISTOGO_URL' in os.environ:
     r = cache.cache._client.connection_pool
     p = urlparse(os.environ['REDISTOGO_URL'])
 
-    r.host = p.host
+    r.host = p.hostname
     r.port = p.port
     r.password = p.password
     r.username = p.username
