@@ -1,5 +1,5 @@
 Flask==0.8
-Flask-Cache==0.3.4
+git+git://github.com/thadeusb/flask-cache.git
 Jinja2==2.6
 Werkzeug==0.8.1
 distribute==0.6.24
