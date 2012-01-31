@@ -33,13 +33,25 @@ def index():
     return jsonify(d)
 
 
+def total_downloads(package):
+    count = downloads_total(package)
+    package = package.swapcase() if package.isupper() else package
+    while not count:
+        for pos, value in enumerate(package):
+            temp_package = package[:pos].swapcase() + package[pos:]
+            count = downloads_total(temp_package)
+            if count:
+                return count
+        else:
+            return count
+        
 @app.route('/pypi/<package>')
 @cache.memoize(timeout=6*60*60)
 def package_stats(package):
 
     d = {
         'package': package,
-        'downloads': downloads_total(package)
+        'downloads': total_downloads(package)
     }
 
     return jsonify(d)
